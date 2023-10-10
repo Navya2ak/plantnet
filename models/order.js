@@ -10,6 +10,9 @@ const schema = new mongoose.Schema({
   deliveryDate: {
     type: Date,
   },
+  plant: {
+    type: String,
+  },
 });
 
 module.exports = model('order', schema);

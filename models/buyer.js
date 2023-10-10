@@ -2,17 +2,17 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   deliveryLocation: {
-    type: string,
+    type: String,
     required: false,
   },
   residentialAddress: {
-    type: string,
+    type: String,
   },
   residentialPincode: {
-    type: string,
+    type: String,
   },
   purchasePoint: {
-    type: number,
+    type: Number,
   },
 });
 
