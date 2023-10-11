@@ -7,9 +7,9 @@ const port = process.env.SERVICE_PORT;
 const { authRouter } = require('./routes');
 
 connectDb(); //mongodb connection
-
+app.use(express.json());
 //routes
-app.use('api/auth', authRouter);
+app.use('/api/auth', authRouter);
 
 app.use(errorHandler);
 app.listen(port, () => {

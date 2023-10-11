@@ -1,17 +1,17 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const schema = new mongoose.Schema({
+const schema = new Schema({
   name: {
-    type: string,
+    type: String,
   },
   phone: {
-    type: string,
+    type: String,
   },
   userType: {
-    type: string,
+    type: String,
   },
   password: {
-    type: string,
+    type: String,
   },
 });
 
