@@ -1,6 +1,6 @@
 const { genSalt, hash } = require('bcrypt');
 const UserModel = require('../models/user');
-const otpModel = require('../models/otp');
+const OtpModel = require('../models/otp');
 const otpService = require('../helper-services/otp-service');
 module.exports = {
   signin: async (req, res) => {
@@ -10,20 +10,19 @@ module.exports = {
     let { phoneNumber, userType, password } = data;
     let salt = await genSalt(10);
     password = await hash(password, salt);
-    let isExists = await UserModel.findOne({ phoneNumber });
-    // if(isExists)
-    // {
-    //   return "You already in our Plantnet, Please signin"
-    // }
-    let otp = Math.floor(Math.random() * 12345);
-    let isOtpGenerated = await otpModel.findOne({ phoneNumber });
+    let isExists = await UserModel.findOne({ phoneNumber, isVerified: true });
+    if (isExists) {
+      return 'You already in our Plantnet, Please signin';
+    }
+    let otp = Math.floor(Math.random() * 123456);
+    let isOtpGenerated = await OtpModel.findOne({ phoneNumber });
     if (isOtpGenerated == null) {
-      await otpModel.create({
+      await OtpModel.create({
         phoneNumber,
         otp,
       });
     } else {
-      await otpModel.updateOne({
+      await OtpModel.updateOne({
         phoneNumber,
         otp,
       });
@@ -38,10 +37,12 @@ module.exports = {
   },
   verifyOtp: async (data) => {
     let { phoneNumber, otp } = data;
-    let otpData = await otpModel.findOne({ phoneNumber });
+    let otpData = await OtpModel.findOne({ phoneNumber });
     if (otpData['otp'] != otp) {
       return 'Invalid OTP!!!';
     }
+    await UserModel.updateOne({ phoneNumber }, { isVerified: true });
+    await OtpModel.findOneAndDelete({ phoneNumber });
     return 'OTP Verified :)';
   },
 };

@@ -13,6 +13,9 @@ const schema = new Schema({
   password: {
     type: String,
   },
+  isVerified: {
+    type: Boolean,
+  },
 });
 
 module.exports = model('user', schema);
