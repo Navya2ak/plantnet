@@ -7,8 +7,7 @@ module.exports = {
       let response = await authService.signin(req.body);
       return res.status(200).json({ response });
     } catch (error) {
-      console.log(error);
-      throw new Error(error);
+      next(error);
     }
   },
 

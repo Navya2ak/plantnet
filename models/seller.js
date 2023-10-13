@@ -1,29 +1,29 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
+  sellerName: {
+    type: String,
+  },
   storeLocation: {
-    type: string,
+    type: String,
   },
   storePincode: {
-    type: string,
+    type: String,
   },
   address: {
-    type: string,
+    type: String,
   },
   storePhoto: {
-    type: string,
+    type: String,
   },
-  paymentMethod: {
-    type: string,
+  openingTime: {
+    type: String,
   },
-  deliveryAvailability: {
-    type: boolean,
-  },
-  workingTime: {
-    type: string,
+  closingTime: {
+    type: String,
   },
   workingDays: {
-    type: string,
+    type: String,
   },
 });
 
