@@ -4,15 +4,7 @@ const UserModel = require('../models/user');
 module.exports = {
   signin: async (req, res, next) => {
     try {
-      let { name, phoneNumber, userType } = req.body;
-      let count = await UserModel.create({
-        name,
-        phoneNumber,
-        userType,
-      });
-      console.log(count);
-
-      let response = await authService.signin();
+      let response = await authService.signin(req.body);
       return res.status(200).json({ response });
     } catch (error) {
       console.log(error);

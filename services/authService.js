@@ -1,10 +1,26 @@
-const { genSalt, hash } = require('bcrypt');
+const { genSalt, hash, compare } = require('bcrypt');
 const UserModel = require('../models/user');
 const OtpModel = require('../models/otp');
 const otpService = require('../helper-services/otp-service');
 module.exports = {
   signin: async (req, res) => {
-    return 'service arrived';
+    let { phoneNumber, password } = req;
+    let isUserVerified = await UserModel.findOne({
+      phoneNumber,
+      isVerified: true,
+    });
+    if (isUserVerified) {
+      let user = await UserModel.findOne({ phoneNumber });
+      let isPasswordValid = await compare(password, user.password);
+
+      if (isPasswordValid) {
+        return 'Happy Signin to Plantnet';
+      } else {
+        return 'Invalid Password';
+      }
+    } else {
+      return `Your Phone number is not verified :( Please Signup and verify your account`;
+    }
   },
   signup: async (data) => {
     let { phoneNumber, userType, password } = data;
