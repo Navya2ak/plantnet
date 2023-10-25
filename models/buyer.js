@@ -1,6 +1,10 @@
-const { mongoose, model } = require('mongoose');
+const { mongoose, model, Schema } = require('mongoose');
 
 const schema = new mongoose.Schema({
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'user',
+  },
   deliveryLocation: {
     type: String,
     required: false,

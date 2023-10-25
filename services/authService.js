@@ -1,7 +1,6 @@
 const { genSalt, hash, compare } = require('bcrypt');
 const UserModel = require('../models/user');
 const OtpModel = require('../models/otp');
-const sellerModel = require('../models/seller');
 const otpService = require('../helper/otp-service');
 module.exports = {
   signin: async (req, res) => {
