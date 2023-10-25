@@ -1,6 +1,7 @@
 const { genSalt, hash, compare } = require('bcrypt');
 const UserModel = require('../models/user');
 const OtpModel = require('../models/otp');
+const sellerModel = require('../models/seller');
 const otpService = require('../helper/otp-service');
 module.exports = {
   signin: async (req, res) => {
@@ -14,6 +15,7 @@ module.exports = {
         let user = await UserModel.findOne({ phoneNumber });
         let isPasswordValid = await compare(password, user.password);
         if (isPasswordValid) {
+          await this.sellerModel.create({ phoneNumber });
           return 'Happy Signin to Plantnet';
         } else {
           throw new Error('Invalid Password');

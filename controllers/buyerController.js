@@ -1,8 +1,16 @@
-const userService = require('../services/userService');
+const buyerService = require('../services/buyerService');
 module.exports = {
   updateBuyerProfile: async (req, res, next) => {
     try {
-      let response = await userService.updateBuyerProfile(req.body);
+      let response = await buyerService.updateBuyerProfile(req.body);
+      return res.status.json({ response });
+    } catch (e) {
+      return e;
+    }
+  },
+  completeBuyerProfile: async (req, res, next) => {
+    try {
+      let response = await buyerService.completeBuyerProfile(req.body);
       return res.status.json({ response });
     } catch (e) {
       return e;
