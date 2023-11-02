@@ -4,7 +4,12 @@ const connectDb = require('./config/db-connection');
 const dotenv = require('dotenv').config();
 const app = express();
 const port = process.env.SERVICE_PORT;
-const { authRouter, sellerRouter, buyerRouter } = require('./routes');
+const {
+  authRouter,
+  sellerRouter,
+  buyerRouter,
+  plantRouter,
+} = require('./routes');
 
 connectDb(); //mongodb connection
 app.use(express.json());
@@ -12,6 +17,7 @@ app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use('/api/seller', sellerRouter);
 app.use('/api/buyer', buyerRouter);
+app.use('/api/plant', plantRouter);
 
 app.use(errorHandler);
 app.listen(port, () => {
