@@ -2,6 +2,7 @@ const { genSalt, hash, compare } = require('bcrypt');
 const UserModel = require('../models/user');
 const OtpModel = require('../models/otp');
 const otpService = require('../helper/otp-service');
+const sellerModel = require('../models/seller');
 module.exports = {
   signin: async (req, res) => {
     try {
@@ -14,7 +15,10 @@ module.exports = {
         let user = await UserModel.findOne({ phoneNumber });
         let isPasswordValid = await compare(password, user.password);
         if (isPasswordValid) {
-          await this.sellerModel.create({ phoneNumber });
+          let sellerData = await sellerModel.findOne({ userId: user.id });
+          if (!sellerData) {
+            await sellerModel.create({ userId: user.id });
+          }
           return 'Happy Signin to Plantnet';
         } else {
           throw new Error('Invalid Password');
@@ -35,7 +39,8 @@ module.exports = {
     password = await hash(password, salt);
     let isExists = await UserModel.findOne({ phoneNumber, isVerified: true });
     if (isExists) {
-      throw new Error('You already in our Plantnet, Please signin');
+      // throw new Error('You already in our Plantnet, Please signin');
+      return 'You already in our Plantnet, Please signin';
     }
     let otp = Math.floor(Math.random() * 123456);
     let isOtpGenerated = await OtpModel.findOne({ phoneNumber });
