@@ -1,5 +1,4 @@
 const authService = require('../services/authService');
-const UserModel = require('../models/user');
 
 module.exports = {
   signin: async (req, res, next) => {
@@ -7,7 +6,7 @@ module.exports = {
       let response = await authService.signin(req.body);
       return res.status(200).json({ response });
     } catch (error) {
-      return next(new Error(error));
+      return next(error);
     }
   },
 
@@ -16,7 +15,7 @@ module.exports = {
       let response = await authService.signup(req.body);
       return res.status(200).json({ data: response });
     } catch (error) {
-      throw new Error(error);
+      return next(error);
     }
   },
   otpVerify: async (req, res, next) => {
@@ -24,7 +23,7 @@ module.exports = {
       let response = await authService.verifyOtp(req.body);
       return res.status(200).json({ data: response });
     } catch (error) {
-      throw new Error(error);
+      return next(error);
     }
   },
 };

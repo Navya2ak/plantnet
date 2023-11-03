@@ -3,6 +3,8 @@ const UserModel = require('../models/user');
 const OtpModel = require('../models/otp');
 const otpService = require('../helper/otp-service');
 const sellerModel = require('../models/seller');
+const { BadRequestError } = require('../exceptions/requestException');
+
 module.exports = {
   signin: async (req, res) => {
     try {
@@ -21,15 +23,13 @@ module.exports = {
           }
           return 'Happy Signin to Plantnet';
         } else {
-          throw new Error('Invalid Password');
+          throw 'Invalid Password';
         }
       } else {
-        throw new Error(
-          `Your Phone number is not verified :( Please Signup and verify your account`,
-        );
+        throw `Your Phone number is not verified :( Please Signup and verify your account`;
       }
     } catch (error) {
-      throw new Error(error);
+      throw new BadRequestError(error);
       // return error;
     }
   },

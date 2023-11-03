@@ -1,8 +1,12 @@
 const { StatusCodes } = require('http-status-codes');
-
+const {
+  BadRequestError,
+  NotFoundError,
+} = require('../exceptions/requestException');
 const errorHandler = (error, req, res, next) => {
-  switch (res.status) {
-    case 400:
+  console.log('-------', error.status);
+  switch (error.name) {
+    case 'BadRequestError':
       res.json({
         status: StatusCodes.BAD_REQUEST,
         message: error.message,
@@ -16,7 +20,7 @@ const errorHandler = (error, req, res, next) => {
         stackTrace: error.stack,
       });
       break;
-    case 404:
+    case 'NotFoundError':
       res.json({
         status: StatusCodes.NOT_FOUND,
         message: error.message,
