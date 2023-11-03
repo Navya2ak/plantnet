@@ -1,7 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
 
 const errorHandler = (error, req, res, next) => {
-  console.log('error', error);
   switch (res.status) {
     case 400:
       res.json({

@@ -29,8 +29,8 @@ module.exports = {
         );
       }
     } catch (error) {
-      console.log('here', error);
-      return error;
+      throw new Error(error);
+      // return error;
     }
   },
   signup: async (data) => {
