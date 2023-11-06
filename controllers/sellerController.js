@@ -3,8 +3,9 @@ module.exports = {
   updateSellerProfile: async (req, res, next) => {
     try {
       let response = await buyerService.updateSellerProfile(req.body);
-      return res.status.json({ response });
+      return res.status(200).json({response})
     } catch (e) {
+      console.log(e);
       return e;
     }
   },

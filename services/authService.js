@@ -19,9 +19,9 @@ module.exports = {
         if (isPasswordValid) {
           let sellerData = await sellerModel.findOne({ userId: user.id });
           if (!sellerData) {
-            await sellerModel.create({ userId: user.id });
+            await sellerModel.create({ userId: user.id,phoneNumber });
           }
-          throw 'Happy Signin to Plantnet';
+          return 'Happy Signin to Plantnet';
         } else {
           throw 'Invalid Password';
         }

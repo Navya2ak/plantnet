@@ -5,6 +5,15 @@ const schema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'user',
   },
+  phoneNumber: {
+    type: String,
+  },
+  personalAddress: {
+    type: String,
+  },
+  personalAddress: {
+    type: String,
+  },
   sellerName: {
     type: String,
   },

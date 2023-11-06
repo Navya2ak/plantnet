@@ -1,13 +1,19 @@
+const { BadRequestError } = require('../exceptions/requestException');
 const SellerModel = require('../models/seller');
 module.exports = {
   updateSellerProfile: async (data) => {
-    let { phoneNumber, personalAddress, photo, gender, sellingSince } = data;
-    await SellerModel.findOneAndUpdate(phoneNumber, {
+    try{let { phoneNumber, personalAddress, photo, gender, sellingSince } = data;
+    let updated=await SellerModel.findOneAndUpdate({phoneNumber}, {
       personalAddress,
-      photo,
-      gender,
+      storePhoto,
       sellingSince,
     });
+    return 'Profile upated'+updated
+  }
+    catch(e)
+    {
+      throw new BadRequestError(e)
+    }
   },
   completeSellerProfile: async (data) => {
     let {
