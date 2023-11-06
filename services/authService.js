@@ -19,7 +19,7 @@ module.exports = {
         if (isPasswordValid) {
           let sellerData = await sellerModel.findOne({ userId: user.id });
           if (!sellerData) {
-            await sellerModel.create({ userId: user.id,phoneNumber });
+            await sellerModel.create({ userId: user.id, phoneNumber });
           }
           return 'Happy Signin to Plantnet';
         } else {

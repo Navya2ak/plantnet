@@ -5,7 +5,7 @@ module.exports = {
       let response = await buyerService.updateBuyerProfile(req.body);
       return res.status.json({ response });
     } catch (e) {
-      return next(e)
+      return next(e);
     }
   },
   completeBuyerProfile: async (req, res, next) => {
@@ -13,7 +13,7 @@ module.exports = {
       let response = await buyerService.completeBuyerProfile(req.body);
       return res.status.json({ response });
     } catch (e) {
-      return next(e)
+      return next(e);
     }
   },
 };
