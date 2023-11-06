@@ -21,7 +21,7 @@ module.exports = {
           if (!sellerData) {
             await sellerModel.create({ userId: user.id });
           }
-          return 'Happy Signin to Plantnet';
+          throw 'Happy Signin to Plantnet';
         } else {
           throw 'Invalid Password';
         }
@@ -30,47 +30,53 @@ module.exports = {
       }
     } catch (error) {
       throw new BadRequestError(error);
-      // return error;
     }
   },
   signup: async (data) => {
-    let { phoneNumber, userType, password } = data;
-    let salt = await genSalt(10);
-    password = await hash(password, salt);
-    let isExists = await UserModel.findOne({ phoneNumber, isVerified: true });
-    if (isExists) {
-      // throw new Error('You already in our Plantnet, Please signin');
-      return 'You already in our Plantnet, Please signin';
-    }
-    let otp = Math.floor(Math.random() * 123456);
-    let isOtpGenerated = await OtpModel.findOne({ phoneNumber });
-    if (isOtpGenerated == null) {
-      await OtpModel.create({
+    try {
+      let { phoneNumber, userType, password } = data;
+      let salt = await genSalt(10);
+      password = await hash(password, salt);
+      let isExists = await UserModel.findOne({ phoneNumber, isVerified: true });
+      if (isExists) {
+        throw 'You already in our Plantnet, Please signin';
+      }
+      let otp = Math.floor(Math.random() * 123456);
+      let isOtpGenerated = await OtpModel.findOne({ phoneNumber });
+      if (isOtpGenerated == null) {
+        await OtpModel.create({
+          phoneNumber,
+          otp,
+        });
+      } else {
+        await OtpModel.updateOne({
+          phoneNumber,
+          otp,
+        });
+      }
+      await otpService.sendOtp(phoneNumber, otp);
+      let user = await UserModel.create({
         phoneNumber,
-        otp,
+        userType,
+        password,
       });
-    } else {
-      await OtpModel.updateOne({
-        phoneNumber,
-        otp,
-      });
+      return user;
+    } catch (error) {
+      throw new BadRequestError(error);
     }
-    await otpService.sendOtp(phoneNumber, otp);
-    let user = await UserModel.create({
-      phoneNumber,
-      userType,
-      password,
-    });
-    return user;
   },
   verifyOtp: async (data) => {
-    let { phoneNumber, otp } = data;
-    let otpData = await OtpModel.findOne({ phoneNumber });
-    if (otpData['otp'] != otp) {
-      return 'Invalid OTP!!!';
+    try {
+      let { phoneNumber, otp } = data;
+      let otpData = await OtpModel.findOne({ phoneNumber });
+      if (otpData['otp'] != otp) {
+        throw 'Invalid OTP!!!';
+      }
+      await UserModel.updateOne({ phoneNumber }, { isVerified: true });
+      await OtpModel.findOneAndDelete({ phoneNumber });
+      return 'OTP Verified :)';
+    } catch (error) {
+      throw new BadRequestError(error);
     }
-    await UserModel.updateOne({ phoneNumber }, { isVerified: true });
-    await OtpModel.findOneAndDelete({ phoneNumber });
-    return 'OTP Verified :)';
   },
 };

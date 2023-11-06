@@ -4,36 +4,27 @@ const {
   NotFoundError,
 } = require('../exceptions/requestException');
 const errorHandler = (error, req, res, next) => {
-  console.log('-------', error.status);
-  switch (error.name) {
-    case 'BadRequestError':
-      res.json({
-        status: StatusCodes.BAD_REQUEST,
+  switch (error.status) {
+    case 400:
+      return res.status(StatusCodes.BAD_REQUEST).json({
         message: error.message,
-        stackTrace: error.stack,
+        status: 400,
       });
-      break;
     case 401:
-      res.json({
-        status: StatusCodes.UNAUTHORIZED,
+      return res.status(StatusCodes.UNAUTHORIZED).json({
         message: error.message,
-        stackTrace: error.stack,
+        status: 401,
       });
-      break;
-    case 'NotFoundError':
-      res.json({
-        status: StatusCodes.NOT_FOUND,
+    case 404:
+      return res.status(StatusCodes.NOT_FOUND).json({
         message: error.message,
-        stackTrace: error.stack,
+        status: 404,
       });
-      break;
-
     default:
-      res.json({
-        status: StatusCodes.INTERNAL_SERVER_ERROR,
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         message: error.message,
+        status: 500,
       });
-      break;
   }
 };
 module.exports = errorHandler;
