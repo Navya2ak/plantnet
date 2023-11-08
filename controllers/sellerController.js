@@ -5,7 +5,7 @@ module.exports = {
       let response = await buyerService.updateSellerPersonalinfo(req.body);
       return res.status(200).json({ response });
     } catch (e) {
-      return next(e)
+      return next(e);
     }
   },
   updateSellerStoreinfo: async (req, res, next) => {
@@ -13,7 +13,7 @@ module.exports = {
       let response = await buyerService.updateSellerStoreinfo(req.body);
       return res.status(200).json({ response });
     } catch (e) {
-      return next(e)
+      return next(e);
     }
   },
   addPlantsforSale: async (req, res, next) => {
@@ -21,8 +21,7 @@ module.exports = {
       let response = await buyerService.addPlantsforSale(req.body);
       return res.status(200).json({ response });
     } catch (e) {
-      return next(e)
+      return next(e);
     }
   },
-
 };

@@ -1,4 +1,4 @@
-const {mongoose,model} = require('mongoose');
+const { mongoose, model } = require('mongoose');
 const schema = new mongoose.Schema({
   userId: {
     type: String,
@@ -18,14 +18,14 @@ const schema = new mongoose.Schema({
   video: {
     type: String,
   },
-  price:{
-    type:Number
+  price: {
+    type: Number,
   },
-  location:{
-    type:String
+  location: {
+    type: String,
   },
-  discount:{
-    type:String
+  discount: {
+    type: String,
   },
   categoryName: {
     type: String,

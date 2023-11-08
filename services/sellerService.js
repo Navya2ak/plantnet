@@ -21,7 +21,13 @@ module.exports = {
   updateSellerStoreinfo: async (data) => {
     try {
       let {
-        userId,location,storePhoto,openingTime,closingTime,workingDays} = data;
+        userId,
+        location,
+        storePhoto,
+        openingTime,
+        closingTime,
+        workingDays,
+      } = data;
       await SellerModel.findOneAndUpdate(
         { userId },
         {
@@ -39,7 +45,19 @@ module.exports = {
   },
   addPlantsforSale: async (data) => {
     try {
-      let { userId,plantName,image,description,audio,video,price,location,discount, categoryName, nurturingKit } = data
+      let {
+        userId,
+        plantName,
+        image,
+        description,
+        audio,
+        video,
+        price,
+        location,
+        discount,
+        categoryName,
+        nurturingKit,
+      } = data;
       await PlantForSale.create({
         userId,
         plantName,
@@ -49,14 +67,14 @@ module.exports = {
         video,
         price,
         location,
-        discount, categoryName, nurturingKit
-      })
+        discount,
+        categoryName,
+        nurturingKit,
+      });
 
-      return "Plant Added FOR SALE Section"
+      return 'Plant Added FOR SALE Section';
     } catch (error) {
       throw new BadRequestError(error);
-
     }
-  }
-
+  },
 };
