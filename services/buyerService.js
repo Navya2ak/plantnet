@@ -1,17 +1,22 @@
 const BuyerModel = require('../models/buyer');
 module.exports = {
-  updateBuyerProfile: async (data) => {
-    try {
-      let { name, phoneNumber } = data;
-      await BuyerModel.findOneAndUpdate(phoneNumber, { name });
-    } catch (e) {
-      throw new Error(e);
-    }
-  },
   completeBuyerProfile: async (data) => {
     try {
-      let { name, phoneNumber } = data;
-      await BuyerModel.findOneAndUpdate(phoneNumber, { name });
+      let {
+        userId,
+        buyerName,
+        photo,
+        location,
+        pincode,
+        destinationForDelivery,
+      } = data;
+      await BuyerModel.findOneAndUpdate(userId, {
+        buyerName,
+        photo,
+        location,
+        pincode,
+        destinationForDelivery,
+      });
     } catch (e) {
       throw new Error(e);
     }

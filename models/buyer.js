@@ -5,9 +5,14 @@ const schema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'user',
   },
+  buyerName: {
+    type: String,
+  },
+  photo: {
+    type: String,
+  },
   deliveryLocation: {
     type: String,
-    required: false,
   },
   residentialAddress: {
     type: String,
