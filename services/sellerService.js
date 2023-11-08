@@ -1,5 +1,6 @@
 const { BadRequestError } = require('../exceptions/requestException');
 const SellerModel = require('../models/seller');
+const PlantForSale = require('../models/plantForSale');
 module.exports = {
   updateSellerPersonalinfo: async (data) => {
     try {
@@ -20,13 +21,7 @@ module.exports = {
   updateSellerStoreinfo: async (data) => {
     try {
       let {
-        userId,
-        location,
-        storePhoto,
-        openingTime,
-        closingTime,
-        workingDays,
-      } = data;
+        userId,location,storePhoto,openingTime,closingTime,workingDays} = data;
       await SellerModel.findOneAndUpdate(
         { userId },
         {
@@ -42,12 +37,25 @@ module.exports = {
       throw new BadRequestError(e);
     }
   },
-  addPlantsforSale:async(data)=>{
+  addPlantsforSale: async (data) => {
     try {
-      let {plantName,image,description,audio,video}=data
-      
+      let { userId,plantName,image,description,audio,video,price,location,discount, categoryName, nurturingKit } = data
+      await PlantForSale.create({
+        userId,
+        plantName,
+        image,
+        description,
+        audio,
+        video,
+        price,
+        location,
+        discount, categoryName, nurturingKit
+      })
+
+      return "Plant Added FOR SALE Section"
     } catch (error) {
-      
+      throw new BadRequestError(error);
+
     }
   }
 

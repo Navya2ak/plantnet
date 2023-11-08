@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const {mongoose,model} = require('mongoose');
 const schema = new mongoose.Schema({
   userId: {
     type: String,
@@ -7,7 +7,7 @@ const schema = new mongoose.Schema({
     type: String,
   },
   image: {
-    type: Number,
+    type: String,
   },
   description: {
     type: String,
@@ -16,7 +16,7 @@ const schema = new mongoose.Schema({
     type: String,
   },
   video: {
-    type: Number,
+    type: String,
   },
   price:{
     type:Number
@@ -26,7 +26,13 @@ const schema = new mongoose.Schema({
   },
   discount:{
     type:String
-  }
+  },
+  categoryName: {
+    type: String,
+  },
+  nurturingKit: {
+    type: Boolean,
+  },
 });
 
 module.exports = model('plantForSale', schema);
