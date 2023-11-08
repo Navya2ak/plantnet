@@ -2,7 +2,9 @@ const { genSalt, hash, compare } = require('bcrypt');
 const UserModel = require('../models/user');
 const OtpModel = require('../models/otp');
 const otpService = require('../helper/otp-service');
-const sellerModel = require('../models/seller');
+const SellerModel = require('../models/seller');
+const BuyerModel = require('../models/buyer');
+
 const { BadRequestError } = require('../exceptions/requestException');
 
 module.exports = {
@@ -17,9 +19,16 @@ module.exports = {
         let user = await UserModel.findOne({ phoneNumber });
         let isPasswordValid = await compare(password, user.password);
         if (isPasswordValid) {
-          let sellerData = await sellerModel.findOne({ userId: user.id });
-          if (!sellerData) {
-            await sellerModel.create({ userId: user.id, phoneNumber });
+          if (user.userType == 'seller') {
+            let sellerData = await SellerModel.findOne({ userId: user.id });
+            if (!sellerData) {
+              await SellerModel.create({ userId: user.id, phoneNumber });
+            }
+          } else {
+            let buyerData = await BuyerModel.findOne({ userId: user.id });
+            if (!buyerData) {
+              await BuyerModel.create({ userId: user.id, phoneNumber });
+            }
           }
           return 'Happy Signin to Plantnet';
         } else {

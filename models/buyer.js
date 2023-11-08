@@ -11,8 +11,8 @@ const schema = new mongoose.Schema({
   photo: {
     type: String,
   },
-  deliveryLocation: {
-    type: String,
+  deliveryLocationDetails: {
+    type: Object,
   },
   residentialAddress: {
     type: String,
