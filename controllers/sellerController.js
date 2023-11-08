@@ -1,8 +1,17 @@
 const buyerService = require('../services/sellerService');
 module.exports = {
-  updateSellerProfile: async (req, res, next) => {
+  updateSellerPersonalinfo: async (req, res, next) => {
     try {
-      let response = await buyerService.updateSellerProfile(req.body);
+      let response = await buyerService.updateSellerPersonalinfo(req.body);
+      return res.status(200).json({ response });
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  },
+  updateSellerStoreinfo: async (req, res, next) => {
+    try {
+      let response = await buyerService.updateSellerStoreinfo(req.body);
       return res.status(200).json({ response });
     } catch (e) {
       console.log(e);
