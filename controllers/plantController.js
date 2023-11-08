@@ -5,7 +5,7 @@ module.exports = {
       let response = await this.plantService.listPlantsCateogeries();
       return response;
     } catch (error) {
-      console.log('error', error);
+      return next(error)
     }
   },
 };

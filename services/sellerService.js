@@ -42,27 +42,13 @@ module.exports = {
       throw new BadRequestError(e);
     }
   },
-  completeSellerProfile: async (data) => {
-    let {
-      sellerName,
-      userId,
-      storeLocation,
-      storePincode,
-      address,
-      storePhoto,
-      openingTime,
-      closingTime,
-      workingDays,
-    } = data;
-    await SellerModel.findOneAndUpdate(userId, {
-      sellerName,
-      storeLocation,
-      storePincode,
-      address,
-      storePhoto,
-      openingTime,
-      closingTime,
-      workingDays,
-    });
-  },
+  addPlantsforSale:async(data)=>{
+    try {
+      let {plantName,image,description,audio,video}=data
+      
+    } catch (error) {
+      
+    }
+  }
+
 };
