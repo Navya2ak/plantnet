@@ -3,16 +3,16 @@ const SellerModel = require('../models/seller');
 module.exports = {
   updateSellerProfile: async (data) => {
     try {
-      let { phoneNumber, personalAddress, photo, gender, sellingSince } = data;
-      let updated = await SellerModel.findOneAndUpdate(
-        { phoneNumber },
+      let { userId, age, storePhoto, farmerSince } = data;
+      await SellerModel.findOneAndUpdate(
+        { userId },
         {
-          personalAddress,
+          age,
           storePhoto,
-          sellingSince,
+          farmerSince,
         },
       );
-      return 'Profile upated' + updated;
+      return 'Profile upated';
     } catch (e) {
       throw new BadRequestError(e);
     }
@@ -20,7 +20,7 @@ module.exports = {
   completeSellerProfile: async (data) => {
     let {
       sellerName,
-      phoneNumber,
+      userId,
       storeLocation,
       storePincode,
       address,
@@ -29,7 +29,7 @@ module.exports = {
       closingTime,
       workingDays,
     } = data;
-    await SellerModel.findOneAndUpdate(phoneNumber, {
+    await SellerModel.findOneAndUpdate(userId, {
       sellerName,
       storeLocation,
       storePincode,

@@ -5,10 +5,10 @@ const schema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'user',
   },
-  phoneNumber: {
+  age: {
     type: String,
   },
-  personalAddress: {
+  farmerSince: {
     type: String,
   },
   personalAddress: {
