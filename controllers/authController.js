@@ -26,4 +26,12 @@ module.exports = {
       return next(error);
     }
   },
+  resetPassword: async (req, res, next) => {
+    try {
+      let response = await authService.resetPassword(req.body);
+      return res.status(200).json({ data: response });
+    } catch (error) {
+      return next(error);
+    }
+  },
 };

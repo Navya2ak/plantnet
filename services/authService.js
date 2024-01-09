@@ -88,4 +88,24 @@ module.exports = {
       throw new BadRequestError(error);
     }
   },
+  resetPassword: async (data) => {
+    try {
+      let { oldPassword, newPassword, confirmPassword } = data;
+      let user = await UserModel.findOne({ _id: data.userId });
+      let isPasswordValid = await compare(oldPassword, user.password);
+      if (!isPasswordValid) {
+        throw 'Invalid Password!!!';
+      }
+      if (newPassword != confirmPassword) {
+        throw 'New Password and Confirm Password must be same';
+      }
+      let salt = await genSalt(10);
+      let password = await hash(confirmPassword, salt);
+      let check = await UserModel.updateOne({ _id: data.userId }, { password });
+      console.log(check);
+      return 'Password Reset Successfull';
+    } catch (error) {
+      throw new BadRequestError(error);
+    }
+  },
 };
