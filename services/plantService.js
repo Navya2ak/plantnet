@@ -9,7 +9,7 @@ module.exports = {
       ),
     );
     plantCategoriesModel.insertMany(data);
-    return ` ${data.length} Categories inserted`;
+    return `${data.length} Categories inserted`;
   },
   listPlantsCategories: async () => {
     return await plantCategoriesModel.find();
