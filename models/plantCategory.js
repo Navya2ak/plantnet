@@ -1,7 +1,7 @@
 const { mongoose, model } = require('mongoose');
 
 const schema = new mongoose.Schema({
-  plantnName: {
+  name: {
     type: String,
   },
   photo: {

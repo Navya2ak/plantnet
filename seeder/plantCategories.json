@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Tree",
+    "photo": "photo",
+    "description": "Trees are large, woody plants with a main trunk and branches"
+  },
+  {
+    "name": "Shrubs",
+    "photo": "photo",
+    "description": "Shrubs are smaller than trees, with multiple stems"
+  },
+  {
+    "name": "Herbs",
+    "photo": "photo",
+    "description": "Herbs are non-woody plants, often short and making persistent above-ground stems"
+  },
+  {
+    "name": "Vines",
+    "photo": "photo",
+    "description": "Vines are plants with trailing or climbing stems, requiring support"
+  },
+  {
+    "name": "Grasses",
+    "photo": "photo",
+    "description": "Grasses are herbaceous plants with narrow leaves and jointed stems"
+  },
+  {
+    "name": "Ferns",
+    "photo": "photo",
+    "description": "Ferns are non-flowering vascular plants with spore reproduction"
+  },
+  {
+    "name": "Creepers",
+    "photo": "photo",
+    "description": "Creepers are plants that spread horizontally along the ground or other surfaces, rooting at nodes"
+  },
+  {
+    "name": "Climbers",
+    "photo": "photo",
+    "description": "Climbers are plants with long, weak stems that need support to grow vertically, for example, Vines"
+  },
+  {
+    "name": "Aquatic",
+    "photo": "photo",
+    "description": "Aquatic plants are plants growing in water or saturated soil"
+  },
+  {
+    "name": "Bamboos",
+    "photo": "photo",
+    "description": "Bamboos are giant grasses with woody stems"
+  }
+]

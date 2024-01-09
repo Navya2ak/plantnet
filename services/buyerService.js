@@ -13,7 +13,6 @@ module.exports = {
       await BuyerModel.findOneAndUpdate(
         { userId },
         {
-          userId,
           buyerName,
           photo,
           deliveryLocationDetails,
