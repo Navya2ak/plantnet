@@ -16,4 +16,12 @@ module.exports = {
       return next(error);
     }
   },
+  pickPlantCategories: async (req, res, next) => {
+    try {
+      let response = await plantService.pickPlantsCategories(req.body);
+      return res.status(200).json({ response });
+    } catch (e) {
+      return next(e);
+    }
+  },
 };
