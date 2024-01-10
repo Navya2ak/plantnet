@@ -9,6 +9,7 @@ const {
   sellerRouter,
   buyerRouter,
   plantRouter,
+  userRouter,
 } = require('./routes');
 
 connectDb(); //mongodb connection
@@ -18,6 +19,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/seller', sellerRouter);
 app.use('/api/buyer', buyerRouter);
 app.use('/api/plant', plantRouter);
+app.use('/api/user', userRouter);
 
 app.use(errorHandler);
 app.listen(port, () => {
