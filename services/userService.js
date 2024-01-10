@@ -1,7 +1,8 @@
+const UserModel = require('../models/user');
 module.exports = {
-  uploadProfilePicture: async (data) => {
+  uploadProfilePicture: async (fileData, userId) => {
     try {
-      console.log('file details', data);
+      await UserModel.updateOne({ _id: userId }, { profilePic: fileData.path });
       return 'Profile pic updated';
     } catch (e) {
       throw new BadRequestError(e);

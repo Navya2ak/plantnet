@@ -16,6 +16,9 @@ const schema = new Schema({
   isVerified: {
     type: Boolean,
   },
+  profilePic: {
+    type: String,
+  },
 });
 
 module.exports = model('user', schema);
