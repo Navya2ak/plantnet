@@ -4,14 +4,9 @@ const schema = new mongoose.Schema({
   userId: {
     type: String,
   },
-  stoke: {
-    type: String,
-  },
-  name: {
-    type: String,
-  },
-  price: {
-    type: Number,
+  productId: {
+    type: schema.Types.ObjectId,
+    ref: 'plant',
   },
   discount: {
     type: Number,

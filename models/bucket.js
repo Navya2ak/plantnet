@@ -4,18 +4,9 @@ const schema = new mongoose.Schema({
   userId: {
     type: String,
   },
-  name: {
-    type: String,
-  },
-  price: {
-    type: Number,
-  },
-  location: {
-    type: String,
-    required: false,
-  },
-  rating: {
-    type: String,
+  productId: {
+    type: schema.Types.ObjectId,
+    ref: 'plant',
   },
   discount: {
     type: Number,

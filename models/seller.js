@@ -38,6 +38,9 @@ const schema = new mongoose.Schema({
   workingDays: {
     type: String,
   },
+  rating: {
+    type: Number,
+  },
 });
 
 module.exports = model('seller', schema);

@@ -1,21 +1,16 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
+  seller: {
+    type: schema.Types.ObjectId,
+    ref: 'seller',
+  },
   name: {
     type: String,
   },
-  categoryName: {
-    type: String,
-  },
-  categoryCode: {
-    type: String,
-  },
-  description: {
-    type: Object,
-    required: false,
-  },
-  photo: {
-    type: String,
+  category: {
+    type: schema.Types.ObjectId,
+    ref: 'plantCategory',
   },
   price: {
     type: Number,
@@ -25,6 +20,9 @@ const schema = new mongoose.Schema({
   },
   nurturingKit: {
     type: Boolean,
+  },
+  likes: {
+    type: Number,
   },
 });
 
