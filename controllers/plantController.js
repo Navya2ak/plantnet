@@ -10,6 +10,9 @@ module.exports = {
   },
   listPlantsCateogeries: async (req, res, next) => {
     try {
+      console.log('req', req.userId);
+      console.log('next', next);
+
       let response = await plantService.listPlantsCategories();
       return res.status(200).json({ response });
     } catch (error) {

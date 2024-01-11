@@ -4,7 +4,7 @@ const OtpModel = require('../models/otp');
 const otpService = require('../helper/otp-service');
 const SellerModel = require('../models/seller');
 const BuyerModel = require('../models/buyer');
-
+const { generateToken } = require('../helper/jwt.service');
 const { BadRequestError } = require('../exceptions/requestException');
 
 module.exports = {
@@ -30,7 +30,8 @@ module.exports = {
               await BuyerModel.create({ userId: user.id, phoneNumber });
             }
           }
-          return 'Happy Signin to Plantnet';
+          let token = await generateToken(user.id);
+          return { message: 'Happy Signin to Plantnet', token };
         } else {
           throw 'Invalid Password';
         }
