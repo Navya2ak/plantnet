@@ -15,7 +15,7 @@ const schema = new Schema({
   },
   isVerified: {
     type: Boolean,
-    default:false
+    default: false,
   },
   profilePic: {
     type: String,

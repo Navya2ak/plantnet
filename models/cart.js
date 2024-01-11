@@ -1,17 +1,19 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const schema = new mongoose.Schema({
+const schema = Schema({
   userId: {
     type: String,
   },
   productId: {
-    type: schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'plant',
   },
   discount: {
+    default: 0,
     type: Number,
   },
   count: {
+    default: 1,
     type: Number,
   },
 });
