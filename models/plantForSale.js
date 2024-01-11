@@ -1,6 +1,9 @@
 const { mongoose, model } = require('mongoose');
 const schema = new mongoose.Schema({
-  userId: {
+  sellerId: {
+    type: String,
+  },
+  category: {
     type: String,
   },
   plantName: {
@@ -32,6 +35,9 @@ const schema = new mongoose.Schema({
   },
   nurturingKit: {
     type: Boolean,
+  },
+  likes: {
+    type: Number,
   },
 });
 

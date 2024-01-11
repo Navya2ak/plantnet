@@ -6,7 +6,7 @@ const schema = Schema({
   },
   productId: {
     type: Schema.Types.ObjectId,
-    ref: 'plant',
+    ref: 'plantForSale',
   },
   discount: {
     default: 0,

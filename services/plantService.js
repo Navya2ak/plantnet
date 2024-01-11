@@ -1,5 +1,6 @@
 const plantCategoriesModel = require('../models/plantCategory');
 const PickedPlantsModel = require('../models/pickedPlants');
+const PlantForSale = require('../models/plantForSale');
 
 const fs = require('fs');
 module.exports = {
@@ -31,6 +32,40 @@ module.exports = {
       return `Plants Categories Added `;
     } catch (error) {
       throw error;
+    }
+  },
+  addPlantsforSale: async (data) => {
+    try {
+      let {
+        userId,
+        plantName,
+        image,
+        description,
+        audio,
+        video,
+        price,
+        location,
+        discount,
+        categoryName,
+        nurturingKit,
+      } = data;
+      await PlantForSale.create({
+        userId,
+        plantName,
+        image,
+        description,
+        audio,
+        video,
+        price,
+        location,
+        discount,
+        categoryName,
+        nurturingKit,
+      });
+
+      return 'Plant Added FOR SALE Section';
+    } catch (error) {
+      throw new BadRequestError(error);
     }
   },
 };
