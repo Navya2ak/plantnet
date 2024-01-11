@@ -1,5 +1,6 @@
 const BuyerModel = require('../models/buyer');
 const CartModel = require('../models/cart');
+const wishlistModel = require('../models/wishlist');
 module.exports = {
   completeBuyerProfile: async (data) => {
     try {
@@ -50,6 +51,30 @@ module.exports = {
         },
         { upsert: true },
       );
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+  addPlantTowishlist: async (data) => {
+    try {
+      let { userId, productId } = data;
+      let product = await wishlistModel.findOne({
+        userId,
+        productId,
+      });
+      if (!product) {
+        await wishlistModel.create({
+          userId,
+          productId,
+        });
+
+        return 'Added To Your Wishlist';
+      }
+      await wishlistModel.deleteOne({
+        userId,
+        productId,
+      });
+      return 'Removed From Your Wishlist';
     } catch (error) {
       throw new Error(error);
     }

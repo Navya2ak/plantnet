@@ -16,4 +16,12 @@ module.exports = {
       return next(e);
     }
   },
+  addPlantTowishlist: async (req, res, next) => {
+    try {
+      let response = await buyerService.addPlantTowishlist(req.body);
+      return res.status(200).json({ response });
+    } catch (e) {
+      return next(e);
+    }
+  },
 };
