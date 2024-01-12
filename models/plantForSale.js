@@ -1,10 +1,12 @@
-const { mongoose, model } = require('mongoose');
-const schema = new mongoose.Schema({
-  sellerId: {
-    type: String,
+const { mongoose, model, Schema } = require('mongoose');
+const schema = Schema({
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'user',
   },
   category: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'plantCategory',
   },
   plantName: {
     type: String,
@@ -28,9 +30,6 @@ const schema = new mongoose.Schema({
     type: String,
   },
   discount: {
-    type: String,
-  },
-  categoryName: {
     type: String,
   },
   nurturingKit: {
