@@ -47,9 +47,15 @@ module.exports = {
       let { phoneNumber, userType, password } = data;
       let salt = await genSalt(10);
       password = await hash(password, salt);
-      let isExists = await UserModel.findOne({ phoneNumber, isVerified: true });
+      let isExists = await UserModel.findOne({ phoneNumber, isVerified: false });
       if (isExists) {
-        throw 'You already in our Plantnet, Please signin';
+        return 'An OTP Send to Your Phone Number, Please Verify ';
+
+      }
+      let isVerified = await UserModel.findOne({ phoneNumber, isVerified: true });
+      if (isVerified) {
+        return 'You already in our Plantnet, Please signin';
+
       }
       let otp = Math.floor(Math.random() * 123456);
       let isOtpGenerated = await OtpModel.findOne({ phoneNumber });
@@ -91,8 +97,9 @@ module.exports = {
   },
   resetPassword: async (data) => {
     try {
-      let { oldPassword, newPassword, confirmPassword } = data;
-      let user = await UserModel.findOne({ _id: data.userId });
+      let { oldPassword, newPassword, confirmPassword, userId } = data;
+      let user = await UserModel.findOne({ _id: userId });
+      console.log(user);
       let isPasswordValid = await compare(oldPassword, user.password);
       if (!isPasswordValid) {
         throw 'Invalid Password!!!';
@@ -101,8 +108,8 @@ module.exports = {
         throw 'New Password and Confirm Password must be same';
       }
       let salt = await genSalt(10);
-      let password = await hash(confirmPassword, salt);
-      let check = await UserModel.updateOne({ _id: data.userId }, { password });
+      let updatedPassword = await hash(newPassword, salt);
+      let check = await UserModel.updateOne({ _id: userId }, { password:updatedPassword });
       console.log(check);
       return 'Password Reset Successfull';
     } catch (error) {
