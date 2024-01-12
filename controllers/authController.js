@@ -28,7 +28,9 @@ module.exports = {
   },
   resetPassword: async (req, res, next) => {
     try {
-      let response = await authService.resetPassword(req.body);
+      let data=req.body
+      data['userId']=req.userId
+      let response = await authService.resetPassword(data);
       return res.status(200).json({ data: response });
     } catch (error) {
       return next(error);
