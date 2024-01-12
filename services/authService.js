@@ -47,15 +47,19 @@ module.exports = {
       let { phoneNumber, userType, password } = data;
       let salt = await genSalt(10);
       password = await hash(password, salt);
-      let isExists = await UserModel.findOne({ phoneNumber, isVerified: false });
+      let isExists = await UserModel.findOne({
+        phoneNumber,
+        isVerified: false,
+      });
       if (isExists) {
         return 'An OTP Send to Your Phone Number, Please Verify ';
-
       }
-      let isVerified = await UserModel.findOne({ phoneNumber, isVerified: true });
+      let isVerified = await UserModel.findOne({
+        phoneNumber,
+        isVerified: true,
+      });
       if (isVerified) {
         return 'You already in our Plantnet, Please signin';
-
       }
       let otp = Math.floor(Math.random() * 123456);
       let isOtpGenerated = await OtpModel.findOne({ phoneNumber });
@@ -109,7 +113,10 @@ module.exports = {
       }
       let salt = await genSalt(10);
       let updatedPassword = await hash(newPassword, salt);
-      let check = await UserModel.updateOne({ _id: userId }, { password:updatedPassword });
+      let check = await UserModel.updateOne(
+        { _id: userId },
+        { password: updatedPassword },
+      );
       console.log(check);
       return 'Password Reset Successfull';
     } catch (error) {
