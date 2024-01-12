@@ -3,13 +3,14 @@ const SellerModel = require('../models/seller');
 module.exports = {
   updateSellerPersonalinfo: async (data) => {
     try {
-      let { userId, age, farmerSince, sellerName } = data;
+      let { userId, age, farmerSince, sellerName, personalAddress } = data;
       await SellerModel.findOneAndUpdate(
         { userId },
         {
           sellerName,
           age,
           farmerSince,
+          personalAddress,
         },
       );
       return 'Personal Info Updated';
@@ -21,7 +22,7 @@ module.exports = {
     try {
       let {
         userId,
-        location,
+        storeLocation,
         storePhoto,
         openingTime,
         closingTime,
@@ -30,7 +31,7 @@ module.exports = {
       await SellerModel.findOneAndUpdate(
         { userId },
         {
-          location,
+          storeLocation,
           storePhoto,
           openingTime,
           closingTime,

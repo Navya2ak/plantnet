@@ -23,7 +23,7 @@ const schema = new mongoose.Schema({
   storePincode: {
     type: String,
   },
-  address: {
+  storeAddress: {
     type: String,
   },
   storePhoto: {
