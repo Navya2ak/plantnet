@@ -17,23 +17,6 @@ module.exports = {
   listPlantsCategories: async () => {
     return await plantCategoriesModel.find();
   },
-  pickPlantsCategories: async (data) => {
-    try {
-      let { userId, pickedPlantsCategories } = data;
-      let isCategoriesPicked = await PickedPlantsModel.findOne({ userId });
-      if (isCategoriesPicked) {
-        await PickedPlantsModel.updateOne(
-          { userId },
-          { pickedPlantsCategories },
-        );
-        return `Plants Categories Added `;
-      }
-      await PickedPlantsModel.create(data);
-      return `Plants Categories Added `;
-    } catch (error) {
-      throw error;
-    }
-  },
   addPlantsforSale: async (data) => {
     try {
       let {

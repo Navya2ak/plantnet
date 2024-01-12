@@ -12,6 +12,5 @@ plant.post(
   verifyToken,
   plantController.listPlantsCateogeries,
 );
-plant.post('/pick/plant', verifyToken, plantController.pickPlantCategories);
 
 module.exports = plant;
