@@ -21,6 +21,7 @@ const schema = new mongoose.Schema({
     type: String,
   },
   purchasePoint: {
+    default: 10,
     type: Number,
   },
 });
