@@ -38,7 +38,22 @@ const schema = new mongoose.Schema({
   workingDays: {
     type: String,
   },
-  rating: {
+  currentRating: {
+    type: Number,
+  },
+  oneStar: {
+    type: Number,
+  },
+  twoStar: {
+    type: Number,
+  },
+  threeStar: {
+    type: Number,
+  },
+  fourStar: {
+    type: Number,
+  },
+  fiveStar: {
     type: Number,
   },
 });

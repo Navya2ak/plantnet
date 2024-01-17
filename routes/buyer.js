@@ -26,4 +26,6 @@ buyer.post(
   buyerController.removePlantFromwishlist,
 );
 
+buyer.post('/rate/shop', verifyToken, buyerController.updateRatingofShop);
+
 module.exports = buyer;
