@@ -10,7 +10,7 @@ buyer.post(
 );
 buyer.post('/plant/to/cart', verifyToken, buyerController.addPlantToCart);
 buyer.post(
-  'remove/plant/from/cart',
+  '/remove/plant/from/cart',
   verifyToken,
   buyerController.removePlantFromCart,
 );
@@ -21,7 +21,7 @@ buyer.post(
   buyerController.addPlantTowishlist,
 );
 buyer.post(
-  'remove/plant/from/wishlist',
+  '/remove/plant/from/wishlist',
   verifyToken,
   buyerController.removePlantFromwishlist,
 );
