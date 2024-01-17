@@ -20,11 +20,31 @@ module.exports = {
       return next(e);
     }
   },
+  removePlantFromCart: async (req, res, next) => {
+    try {
+      let data = req.body;
+      data['userId'] = req.userId;
+      let response = await buyerService.removePlantFromCart(data);
+      return res.status(200).json({ response });
+    } catch (e) {
+      return next(e);
+    }
+  },
   addPlantTowishlist: async (req, res, next) => {
     try {
       let data = req.body;
       data['userId'] = req.userId;
       let response = await buyerService.addPlantTowishlist(data);
+      return res.status(200).json({ response });
+    } catch (e) {
+      return next(e);
+    }
+  },
+  removePlantFromwishlist: async (req, res, next) => {
+    try {
+      let data = req.body;
+      data['userId'] = req.userId;
+      let response = await buyerService.removePlantFromwishlist(data);
       return res.status(200).json({ response });
     } catch (e) {
       return next(e);
