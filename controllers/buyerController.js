@@ -1,4 +1,6 @@
 const buyerService = require('../services/buyerService');
+const sellerService = require('../services/sellerService');
+
 module.exports = {
   completeBuyerProfile: async (req, res, next) => {
     try {
@@ -45,6 +47,14 @@ module.exports = {
       let data = req.body;
       data['userId'] = req.userId;
       let response = await buyerService.removePlantFromwishlist(data);
+      return res.status(200).json({ response });
+    } catch (e) {
+      return next(e);
+    }
+  },
+  updateRatingofShop: async (req, res, next) => {
+    try {
+      let response = await sellerService.updateRatingofShop(req.body);
       return res.status(200).json({ response });
     } catch (e) {
       return next(e);

@@ -14,4 +14,6 @@ seller.post(
   sellerController.updateSellerStoreinfo,
 );
 seller.post('/plant/add', verifyToken, sellerController.addPlantsforSale);
+seller.post('/rating', verifyToken, sellerController.currentShopRating);
+
 module.exports = seller;

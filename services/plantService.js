@@ -1,5 +1,4 @@
 const plantCategoriesModel = require('../models/plantCategory');
-const PickedPlantsModel = require('../models/pickedPlants');
 const PlantForSale = require('../models/plantForSale');
 
 const fs = require('fs');
