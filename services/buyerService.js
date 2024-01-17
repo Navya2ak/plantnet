@@ -55,6 +55,18 @@ module.exports = {
       throw new Error(error);
     }
   },
+  removePlantFromCart: async (data) => {
+    try {
+      let { userId, productId } = data;
+      await CartModel.deleteOne({
+        userId,
+        productId,
+      });
+      return 'Item Removed from Your Cart';
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
   addPlantTowishlist: async (data) => {
     try {
       let { userId, productId } = data;
@@ -70,6 +82,18 @@ module.exports = {
 
         return 'Added To Your Wishlist';
       }
+      await wishlistModel.deleteOne({
+        userId,
+        productId,
+      });
+      return 'Removed From Your Wishlist';
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+  removePlantFromwishlist: async (data) => {
+    try {
+      let { userId, productId } = data;
       await wishlistModel.deleteOne({
         userId,
         productId,
