@@ -36,6 +36,7 @@ const schema = Schema({
     type: Boolean,
   },
   likes: {
+    default: 0,
     type: Number,
   },
 });
