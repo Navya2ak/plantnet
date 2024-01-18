@@ -1,5 +1,6 @@
 const { BadRequestError } = require('../exceptions/requestException');
 const SellerModel = require('../models/seller');
+const PlantforSaleModel = require('../models/plantForSale');
 module.exports = {
   updateSellerPersonalinfo: async (data) => {
     try {
@@ -108,6 +109,17 @@ module.exports = {
         { currentShopRating: 1 },
       );
       console.log('===========', currentRating);
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+  likePlant: async (productId) => {
+    try {
+      let _id = productId.productId;
+      let plant = await PlantforSaleModel.findOne({ _id });
+      plant.likes++;
+      plant.save();
+      return 'Like Added';
     } catch (error) {
       throw new Error(error);
     }
