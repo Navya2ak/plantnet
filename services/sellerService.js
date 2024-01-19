@@ -44,11 +44,12 @@ module.exports = {
       throw new BadRequestError(e);
     }
   },
+ 
   updateRatingofShop: async (data) => {
     try {
       let { stars, sellerId } = data;
       await updateStarCount(stars, sellerId);
-      let currentRating = await calculateCurrentRating();
+      let currentRating = await calculateCurrentRating(sellerId);
       await SellerModel.findOneAndUpdate(
         {
           userId: sellerId,
@@ -57,49 +58,12 @@ module.exports = {
           currentRating,
         },
       );
-      return 'Rating Added';
+      return 'Rating Added'+currentRating;
     } catch (error) {
       throw new Error(error);
     }
   },
-  updateStarCount: async (stars, sellerId) => {
-    let currentRating = await SellerModel.findOne({
-      userId: sellerId,
-    });
-    if (stars == 1) {
-      currentRating.oneStar++;
-      currentRating.save();
-    }
-    if (stars == 2) {
-      currentRating.twoStar++;
-      currentRating.save();
-    }
-    if (stars == 3) {
-      currentRating.threeStar++;
-      currentRating.save();
-    }
-    if (stars == 4) {
-      currentRating.fourStar++;
-      currentRating.save();
-    }
-    if (stars == 5) {
-      currentRating.fiveStar++;
-      currentRating.save();
-    }
-  },
-  calculateCurrentRating: async (sellerId) => {
-    let currentRating = await SellerModel.findOne({
-      userId: sellerId,
-    });
-    let rating =
-      (currentRating.oneStar +
-        currentRating.twoStar +
-        currentRating.threeStar +
-        currentRating.fourStar +
-        currentRating.fiveStar) /
-      5;
-    return rating;
-  },
+ 
   currentShopRating: async (sellerId) => {
     try {
       let currentRating = await SellerModel.findOne(
@@ -108,7 +72,6 @@ module.exports = {
         },
         { currentShopRating: 1 },
       );
-      console.log('===========', currentRating);
     } catch (error) {
       throw new Error(error);
     }
@@ -125,3 +88,49 @@ module.exports = {
     }
   },
 };
+async function updateStarCount(stars, sellerId) {
+  let currentRating = await SellerModel.findOne({
+    userId: sellerId,
+  });
+  if (stars == 1) {
+    currentRating.oneStar++;
+    currentRating.save();
+  }
+  if (stars == 2) {
+    currentRating.twoStar++;
+    currentRating.save();
+  }
+  if (stars == 3) {
+    currentRating.threeStar++;
+    currentRating.save();
+  }
+  if (stars == 4) {
+    currentRating.fourStar++;
+    currentRating.save();
+  }
+  if (stars == 5) {
+    currentRating.fiveStar++;
+    currentRating.save();
+  }
+}
+
+
+async function calculateCurrentRating(sellerId) {
+  let currentRating = await SellerModel.findOne({
+    userId: sellerId,
+  });
+  let totalStars=currentRating.oneStar +
+  currentRating.twoStar +
+  currentRating.threeStar +
+  currentRating.fourStar +
+  currentRating.fiveStar
+
+  let rating =
+    (currentRating.oneStar*1 +
+     currentRating.twoStar*2 +
+      currentRating.threeStar*3 +
+      currentRating.fourStar*4+
+      currentRating.fiveStar*5)/totalStars
+  return parseFloat(rating).toFixed(2)
+}  
+;
