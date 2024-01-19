@@ -10,6 +10,7 @@ const {
   buyerRouter,
   plantRouter,
   userRouter,
+  messageRouter,
 } = require('./routes');
 
 connectDb(); //mongodb connection
@@ -20,6 +21,7 @@ app.use('/api/seller', sellerRouter);
 app.use('/api/buyer', buyerRouter);
 app.use('/api/plant', plantRouter);
 app.use('/api/user', userRouter);
+app.use('/api/message', messageRouter);
 
 app.use(errorHandler);
 app.listen(port, () => {
