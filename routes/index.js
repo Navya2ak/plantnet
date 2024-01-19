@@ -4,4 +4,5 @@ module.exports = {
   buyerRouter: require('./buyer'),
   plantRouter: require('./plant'),
   userRouter: require('./user'),
+  messageRouter: require('./message'),
 };
