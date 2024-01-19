@@ -14,8 +14,14 @@ const schema = new mongoose.Schema({
     type: Date,
   },
   type: {
-    type: Number,
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+  },
+  updatedAt: {
+    type: Date,
   },
 });
 
-module.exports = model('cart', schema);
+module.exports = model('message', schema);
