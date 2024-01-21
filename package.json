@@ -15,7 +15,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "format": "npx prettier . --write"
   },
   "name": "plantnet",
   "description": "plantnet",
