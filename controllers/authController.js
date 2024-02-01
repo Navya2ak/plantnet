@@ -18,6 +18,7 @@ module.exports = {
       return next(error);
     }
   },
+  
   otpVerify: async (req, res, next) => {
     try {
       let response = await authService.verifyOtp(req.body);
