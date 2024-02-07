@@ -5,7 +5,7 @@ const otpService = require('../helper/otp-service');
 const SellerModel = require('../models/seller');
 const BuyerModel = require('../models/buyer');
 const { generateToken } = require('../helper/jwt.service');
-const { BadRequestError } = require('../exceptions/requestException');
+const { BadRequestError } = require('../exceptions/requestException'); 
 
 module.exports = {
   signin: async (req, res) => {
