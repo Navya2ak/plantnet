@@ -5,7 +5,7 @@ module.exports = {
   completeBuyerProfile: async (req, res, next) => {
     try {
       let data = req.body;
-      data['userId'] = req.userId;
+      data['userId'] = req.userId; 
       let response = await buyerService.completeBuyerProfile(data);
       return res.status(200).json({ response });
     } catch (e) {
