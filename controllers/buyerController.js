@@ -62,7 +62,23 @@ module.exports = {
   },
   likePlant: async (req, res, next) => {
     try {
-      let response = await sellerService.likePlant(req.body);
+      let response = await buyerService.likePlant(req.body);
+      return res.status(200).json({ response });
+    } catch (e) {
+      return next(e);
+    }
+  },
+  listCart: async (req, res, next) => {
+    try {
+      let response = await buyerService.listCart(req.body);
+      return res.status(200).json({ response });
+    } catch (e) {
+      return next(e);
+    }
+  },
+  listWishlist: async (req, res, next) => {
+    try {
+      let response = await buyerService.listWishlist(req.body);
       return res.status(200).json({ response });
     } catch (e) {
       return next(e);
