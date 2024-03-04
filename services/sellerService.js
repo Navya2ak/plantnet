@@ -76,17 +76,6 @@ module.exports = {
       throw new Error(error);
     }
   },
-  likePlant: async (productId) => {
-    try {
-      let _id = productId.productId;
-      let plant = await PlantforSaleModel.findOne({ _id });
-      plant.likes++;
-      plant.save();
-      return 'Like Added';
-    } catch (error) {
-      throw new Error(error);
-    }
-  },
 };
 async function updateStarCount(stars, sellerId) {
   let currentRating = await SellerModel.findOne({
