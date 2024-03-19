@@ -117,8 +117,8 @@ module.exports = {
   },
   listWishlist: async (userId) => {
     try {
-      let wishLiistedPlants = await WishlistModel.find({ userId ,raw:true});
-      return wishLiistedPlants
+      let wishLiistedPlants = await WishlistModel.find({ userId, raw: true });
+      return wishLiistedPlants;
     } catch (error) {
       throw new Error(error);
     }
