@@ -8,7 +8,7 @@ module.exports = {
       });
       return token;
     } catch (error) {
-      console.log('error', error);
+      throw error
     }
   },
   verifyToken: async (req, res, next) => {

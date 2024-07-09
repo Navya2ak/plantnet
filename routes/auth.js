@@ -7,5 +7,6 @@ auth.post('/signin', authcontroller.signin);
 auth.post('/signup', authcontroller.signup);
 auth.post('/otp/verify', authcontroller.otpVerify);
 auth.post('/password/reset', verifyToken, authcontroller.resetPassword);
+auth.post('/password/set', verifyToken, authcontroller.setPassword);
 
 module.exports = auth;
