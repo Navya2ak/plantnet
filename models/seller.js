@@ -5,9 +5,6 @@ const schema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'user',
   },
-  age: {
-    type: String,
-  },
   farmerSince: {
     type: String,
   },

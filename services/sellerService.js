@@ -4,12 +4,11 @@ const PlantforSaleModel = require('../models/plantForSale');
 module.exports = {
   updateSellerPersonalinfo: async (data) => {
     try {
-      let { userId, age, farmerSince, sellerName, personalAddress } = data;
+      let { userId, farmerSince, sellerName, personalAddress } = data;
       await SellerModel.findOneAndUpdate(
         { userId },
         {
           sellerName,
-          age,
           farmerSince,
           personalAddress,
         },
