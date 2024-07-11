@@ -32,6 +32,7 @@ module.exports = {
         location,
         categoryName,
         isKitAvailable,
+        nItems
       } = data;
       await PlantForSale.create({
         userId,
@@ -46,6 +47,7 @@ module.exports = {
         location,
         categoryName,
         isKitAvailable,
+        nItems
       });
 
       return 'Plant Added FOR SALE Section';

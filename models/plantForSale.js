@@ -39,6 +39,9 @@ const schema = Schema({
     default: 0,
     type: Number,
   },
+  nItems: {
+    type: Number,
+  },
 });
 
 module.exports = model('plantForSale', schema);
