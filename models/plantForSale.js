@@ -32,7 +32,7 @@ const schema = Schema({
   discount: {
     type: String,
   },
-  nurturingKit: {
+  isKitAvailable: {
     type: Boolean,
   },
   likes: {

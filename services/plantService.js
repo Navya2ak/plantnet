@@ -1,5 +1,6 @@
 const plantCategoriesModel = require('../models/plantCategory');
 const PlantForSale = require('../models/plantForSale');
+const { BadRequestError } = require('../exceptions/requestException'); 
 
 const fs = require('fs');
 module.exports = {
@@ -20,33 +21,36 @@ module.exports = {
     try {
       let {
         userId,
+        category,
+        price,
         plantName,
+        discount,
         image,
         description,
         audio,
         video,
-        price,
         location,
-        discount,
         categoryName,
-        nurturingKit,
+        isKitAvailable,
       } = data;
       await PlantForSale.create({
         userId,
+        category,
+        price,
         plantName,
+        discount,
         image,
         description,
         audio,
         video,
-        price,
         location,
-        discount,
         categoryName,
-        nurturingKit,
+        isKitAvailable,
       });
 
       return 'Plant Added FOR SALE Section';
     } catch (error) {
+      console.log(error);
       throw new BadRequestError(error);
     }
   },
