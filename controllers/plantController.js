@@ -16,4 +16,13 @@ module.exports = {
       return next(error);
     }
   },
+  // plant details
+  // plant statistics
+  // edit plant
+  // audio video upload
+  // orders list
+  // order details
+  // order accept
+  // order status updation
+  
 };
