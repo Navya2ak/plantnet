@@ -7,7 +7,7 @@ plant.post(
   verifyToken,
   plantController.bulkInserCateories,
 );
-plant.post(
+plant.get(
   '/list/categories',
   verifyToken,
   plantController.listPlantsCateogeries,
