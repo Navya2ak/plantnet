@@ -52,7 +52,7 @@ module.exports = {
       return next(e);
     }
   },
-  updateRatingofShop: async (req, res, next) => {
+  rateAshop: async (req, res, next) => {
     try {
       let response = await sellerService.updateRatingofShop(req.body);
       return res.status(200).json({ response });
