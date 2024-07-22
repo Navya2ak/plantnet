@@ -30,6 +30,15 @@ module.exports = {
     } catch (e) {
       return next(e);
     }
+  }, deletePlantsfromSale: async (req, res, next) => {
+    try {
+      let data = req.body;
+      data['userId'] = req.userId;
+      let response = await plantService.addPlantsforSale(data);
+      return res.status(200).json({ response });
+    } catch (e) {
+      return next(e);
+    }
   },
   currentShopRating: async (req, res, next) => {
     try {
