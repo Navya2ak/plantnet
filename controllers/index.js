@@ -1,7 +1,8 @@
-export { adminControlller as AdminControlller } from "./adminControlller"
-export { authController as AuthController } from "./authController"
-export { buyerController as BuyerController } from "./buyerController"
-export { messageController as MessageController } from "./messageController"
-export { plantController as PlantController } from "./plantController"
-export { sellerController as SellerController } from "./sellerController"
-export { userController as UserController } from "./userController"
+module.exports.AdminControlller=require('./adminControlller')
+module.exports.AuthController = require('./authController')
+module.exports.BuyerController = require('./buyerController')
+module.exports.MessageController = require('./messageController')
+module.exports.PlantController = require('./plantController')
+module.exports.SellerController = require('./sellerController')
+module.exports.UserController = require('./userController')
+
