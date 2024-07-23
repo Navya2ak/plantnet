@@ -1,11 +1,11 @@
-export {order as Order} from "./order"
-export { buyer as Buyer} from "./buyer"
-export { cart as Cart } from "./cart"
-export { message as Message } from "./message"
-export { otp as OTP } from "./otp"
-export { plantCategory as PlantCategory } from "./plantCategory"
-export { plantForSale as PlantForSale } from "./plantForSale"
-export { post as Post } from "./post"
-export { seller as Seller } from "./seller"
-export { user as User } from "./user"
-export { wishlist as Wishlist } from "./wishlist"
+module.exports.Order = require("./order")
+module.exports.Buyer = require("./buyer")
+module.exports.Cart = require("./cart")
+module.exports.Message = require("./message")
+module.exports.PlantCategory = require("./plantCategory")
+module.exports.OTP = require("./otp")
+module.exports.PlantForSale = require("./plantForSale")
+module.exports.Post = require("./post")
+module.exports.User = require("./user")
+module.exports.Seller = require("./seller")
+module.exports.Wishlist = require("./wishlist")
