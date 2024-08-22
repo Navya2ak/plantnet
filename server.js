@@ -17,7 +17,7 @@ const {
 connectDb(); //mongodb connection
 app.use(express.json());
 //routes
-app.use('/', systemRouter);
+app.use('/plantnet', systemRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/seller', sellerRouter);
 app.use('/api/buyer', buyerRouter);
