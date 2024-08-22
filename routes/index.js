@@ -5,4 +5,5 @@ module.exports = {
   plantRouter: require('./plant'),
   userRouter: require('./user'),
   messageRouter: require('./message'),
+  systemRouter: require('./system'),
 };
