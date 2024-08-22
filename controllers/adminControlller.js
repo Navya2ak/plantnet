@@ -1,3 +1,4 @@
+const plantService=require('../services/plantService')
 module.exports = {
     bulkInserCateories: async (req, res, next) => {
         try {
