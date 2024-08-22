@@ -4,7 +4,6 @@ const client = require('twilio')(
 );
 module.exports = {
   sendOtp: async (phoneNumber, otp) => {
-    console.log("----")
     try {
       client.messages.create({
         body: otp,
