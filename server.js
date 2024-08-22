@@ -16,6 +16,9 @@ const {
 connectDb(); //mongodb connection
 app.use(express.json());
 //routes
+app.use('/', (req, res) => {
+  res.send('hey plantnet!');
+});
 app.use('/api/auth', authRouter);
 app.use('/api/seller', sellerRouter);
 app.use('/api/buyer', buyerRouter);
