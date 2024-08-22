@@ -27,6 +27,6 @@ build:development:
       # SSH into the remote server and create the target directory if it doesn't exist.
     - rsync -av -r ./* ubuntu@54.165.107.96:/home/ubuntu/servers/plantnet
       # Sync all files from the current directory to the target directory on the remote server.
-    - ssh ubuntu@54.165.107.96 'cd /home/ubuntu/servers/plantnet && docker build -t deploytest -f Dockerfile . && docker run -d --name plantnet plantnet-server'
-      # SSH into the remote server, navigate to the target directory, build the Docker image with the tag 'deploytest',
+    - ssh ubuntu@54.165.107.96 'cd /home/ubuntu/servers/plantnet && docker build -t plantnet-server -f Dockerfile . && docker run -d --name plantnet plantnet-server'
+      # SSH into the remote server, navigate to the target directory, build the Docker image with the tag 'plantnet-server',
       # and then run a container from that image with the name 'plantnet'.
