@@ -18,12 +18,12 @@ connectDb(); //mongodb connection
 app.use(express.json());
 //routes
 app.use('/plantnet', systemRouter);
-app.use('/api/auth', authRouter);
-app.use('/api/seller', sellerRouter);
-app.use('/api/buyer', buyerRouter);
-app.use('/api/plant', plantRouter);
-app.use('/api/user', userRouter);
-app.use('/api/message', messageRouter);
+app.use('/plantnet/api/auth', authRouter);
+app.use('/plantnet/api/seller', sellerRouter);
+app.use('/plantnet/api/buyer', buyerRouter);
+app.use('/plantnet/api/plant', plantRouter);
+app.use('/plantnet/api/user', userRouter);
+app.use('/plantnet/api/message', messageRouter);
 
 app.use(errorHandler);
 app.listen(port, () => {
