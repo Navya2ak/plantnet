@@ -23,10 +23,10 @@ build:development:
     - apk update # Update the Alpine package index to ensure the latest package versions.
     - apk add rsync # Install rsync for file synchronization.
     - rsync --version # Display the version of rsync to verify it was installed correctly.
-    - ssh ubuntu@54.165.107.96 'mkdir -p /home/ubuntu/servers/plantnet'
+    - ssh ubuntu@54.165.107.96 'mkdir -p /home/ubuntu/servers/plantnet_api'
       # SSH into the remote server and create the target directory if it doesn't exist.
-    - rsync -av -r ./* ubuntu@54.165.107.96:/home/ubuntu/servers/plantnet
+    - rsync -av -r ./* ubuntu@54.165.107.96:/home/ubuntu/servers/plantnet_api
       # Sync all files from the current directory to the target directory on the remote server.
-    - ssh ubuntu@54.165.107.96 'cd /home/ubuntu/servers/plantnet && docker build -t plantnet-server -f Dockerfile . && docker run -d --name plantnet plantnet-server'
-      # SSH into the remote server, navigate to the target directory, build the Docker image with the tag 'plantnet-server',
-      # and then run a container from that image with the name 'plantnet'.
+    - ssh ubuntu@54.165.107.96 'cd /home/ubuntu/servers/plantnet_api && docker build -t plantnet_api_server -f Dockerfile . && docker run -d --name plantnet_api plantnet_api_server'
+      # SSH into the remote server, navigate to the target directory, build the Docker image with the tag 'plantnet_api_server',
+      # and then run a container from that image with the name 'plantnet_api'.
