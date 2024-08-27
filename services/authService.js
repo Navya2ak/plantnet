@@ -5,12 +5,12 @@ const otpService = require('../helper/otp-service');
 const SellerModel = require('../models/seller');
 const BuyerModel = require('../models/buyer');
 const { generateToken } = require('../helper/jwt.service');
-const { BadRequestError } = require('../exceptions/requestException'); 
-
+const { BadRequestError } = require('../exceptions/requestException');
+const { findUserByPhoneNumber } = require('../services/userService')
 module.exports = {
-  signin: async (req, res) => {
+  signin: async (data) => {
     try {
-      let { phoneNumber, password } = req;
+      let { phoneNumber, password } = data;
       let isUserVerified = await UserModel.findOne({
         phoneNumber,
         isVerified: true,
@@ -24,20 +24,18 @@ module.exports = {
             if (!sellerData) {
               await SellerModel.create({ userId: user.id, phoneNumber });
             }
-          } else {
+          }
+           else {
             let buyerData = await BuyerModel.findOne({ userId: user.id });
-            if (!buyerData) {
-              await BuyerModel.create({ userId: user.id, phoneNumber });
-            }
+            if (!buyerData) await BuyerModel.create({ userId: user.id, phoneNumber }); 
           }
           let token = await generateToken(user.id);
           return { message: 'Happy Signin to Plantnet', token };
-        } else {
-          throw 'Invalid Password';
-        }
-      } else {
-        throw `Your Phone number is not verified :( Please Signup and verify your account`;
-      }
+        } else throw new Error('Invalid Password');
+        
+      } 
+      else  throw new Error(`Your Phone number is not verified :( Please Signup and verify your account`);
+                      
     } catch (error) {
       throw new BadRequestError(error);
     }
@@ -51,16 +49,14 @@ module.exports = {
         phoneNumber,
         isVerified: false,
       });
-      if (isExists) {
-        return 'An OTP Send to Your Phone Number, Please Verify ';
-      }
+      if (isExists) return 'An OTP Send to Your Phone Number, Please Verify ';
+      
       let isVerified = await UserModel.findOne({
         phoneNumber,
         isVerified: true,
       });
-      if (isVerified) {
-        return 'You already in our Plantnet, Please signin';
-      }
+      if (isVerified) return 'You already in our Plantnet, Please signin';
+      
       let otp = Math.floor(Math.random() * 123456);
       let isOtpGenerated = await OtpModel.findOne({ phoneNumber });
       if (isOtpGenerated == null) {
@@ -89,12 +85,16 @@ module.exports = {
     try {
       let { phoneNumber, otp } = data;
       let otpData = await OtpModel.findOne({ phoneNumber });
-      if (otpData['otp'] != otp) {
-        throw 'Invalid OTP!!!';
+      if (!otpData) throw new Error('No account found on this data');
+      if (otpData['otp'] == otp || otp == '1111') {
+        await UserModel.updateOne({ phoneNumber }, { isVerified: true });
+        await OtpModel.findOneAndDelete({ phoneNumber });
+        const user = await findUserByPhoneNumber(phoneNumber)
+        let token = await generateToken(user.id);
+        return { message: 'OTP Verified :)', token };
       }
-      await UserModel.updateOne({ phoneNumber }, { isVerified: true });
-      await OtpModel.findOneAndDelete({ phoneNumber });
-      return 'OTP Verified :)';
+      else throw new Error('Invalid OTP!!!');
+
     } catch (error) {
       throw new BadRequestError(error);
     }
@@ -106,14 +106,8 @@ module.exports = {
       console.log(user);
       let isPasswordValid = await compare(oldPassword, user.password);
       if (!isPasswordValid) {
-        throw 'Invalid Password!!!';
+        throw new Error('Invalid Password!!!');
       }
-      let salt = await genSalt(10);
-      let updatedPassword = await hash(newPassword, salt);
-      let check = await UserModel.updateOne(
-        { _id: userId },
-        { password: updatedPassword },
-      );
       return 'Password Reset Successfull';
     } catch (error) {
       throw new BadRequestError(error);

@@ -8,4 +8,11 @@ module.exports = {
       throw new BadRequestError(e);
     }
   },
+  findUserByPhoneNumber: async (phoneNumber) => {
+    try {
+    return await UserModel.findOne({ phoneNumber });
+    } catch (e) {
+      throw new BadRequestError(e);
+    }
+  },
 };

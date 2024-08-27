@@ -8,7 +8,7 @@ module.exports = {
       
       client.messages.create({
         body: otp,
-        from: '+12564084503',
+        from: process.env.TWILIO_NUMBER,
         to: '+918848561387',
       });
       return 'OTP Send!!';

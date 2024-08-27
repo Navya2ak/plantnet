@@ -20,8 +20,6 @@ build:development:
     - apk add rsync 
     - rsync --version 
     - ssh ubuntu@54.165.107.96 'docker stop plantnet || true && docker rm plantnet || true'
-      
     - rsync -av -r ./* ubuntu@54.165.107.96:/home/ubuntu/servers/plantnet
-      
     - ssh ubuntu@54.165.107.96 'cd /home/ubuntu/servers/plantnet && docker build -t plantnet-server -f Dockerfile . && docker run -d --name plantnet plantnet-server'
      
